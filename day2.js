@@ -1,6 +1,13 @@
 var fs = require('fs');
 
-fs.readFile('data34.txt', 'utf8', function (err, contents) {
+fs.readFile('day2data.txt', 'utf8', function (err, contents) {
+
+  part1(contents)
+  part2(contents)
+
+});
+
+function part1(contents) {
   let arrayContents = contents.split("\n");
 
   let numDouble = 0;
@@ -25,6 +32,27 @@ fs.readFile('data34.txt', 'utf8', function (err, contents) {
     hasDouble ? numDouble++ : null;
     hasTriple ? numTriple++ : null;
   }
-  console.log(numDouble, " ", numTriple, " ", numDouble*numTriple)
-});
+  console.log(numDouble, " ", numTriple, " ", numDouble * numTriple)
+}
 
+function part2(contents) {
+  let arrayContents = contents.split("\n");
+
+  while (arrayContents.length > 0) {
+    let current = arrayContents.pop().split("")
+
+    arrayContents.map(string => {
+      let numDif = 0;
+      let seperatedString = string.split("")
+      for (let i = 0; i < current.length; i++) {
+        if (current[i] !== seperatedString[i]) {
+          numDif ++;
+          seperatedString[i] = null
+        }
+      }
+      if (numDif <= 1) {
+        console.log(seperatedString.join(''));
+      }
+    })
+  }
+}
